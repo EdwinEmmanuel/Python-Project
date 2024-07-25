@@ -1,0 +1,45 @@
+<html>
+   <head>
+       <title>Web Development Project</title>
+	   <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+   </head>
+   <body>
+      <h1>Medical Store Management System Using Flask & MySQL</h1>
+	  
+	  <h4>
+	    {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+	  </h4>
+	  
+	  <p><a href="{{url_for('AddUsers')}}">Add Users</a></p>
+      <table>
+	     <tr>
+		    <th>MEDCODE</th>
+			<th>MEDNAME</th>
+			<th>MOBILE</th>
+			<th>QUANTITY</th>
+			<th>PRICE</th>
+			<th>EDIT</th>
+			<th>DELETE</th>
+		 </tr>
+		 {% for data in datas %}
+		     <tr>
+			    <td>{{data.MedCode}}</td>
+				<td>{{data.MedName}}</td>
+				<td>{{data.Mobile}}</td>
+				<td>{{data.Quantity}}</td>
+				<td>{{data.Price}}</td>
+				<td><a href="{{url_for('edituser',medcode=data.MedCode)}}">Edit
+				</a></td>
+				<td><a onclick="return confirm('Are you sure you want to delete?');" href="{{url_for('deleteUser',medcode=data.MedCode)}}">Delete
+				</a></td>
+			 </tr>
+		 {% endfor %}
+	  </table>
+   </body>
+</html>
